@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="description" content="Harmonia - 一个美观易用的在线音乐播放器，支持歌词显示、播放列表管理和多主题切换" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" />
   <title>Harmonia - 音乐播放器</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
@@ -179,6 +184,7 @@
       transform: scale(1.2);
       transition: background-image 0.5s ease;
       will-change: background-image;
+      contain: strict;
     }
 
     .am-background::after {
@@ -505,6 +511,7 @@
       backdrop-filter: var(--liquid-blur) var(--liquid-saturate) !important;
       -webkit-backdrop-filter: var(--liquid-blur) var(--liquid-saturate) !important;
       box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
+      contain: layout style;
     }
 
     .island-result-item:hover {
@@ -956,6 +963,8 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      content-visibility: auto;
+      contain-intrinsic-size: auto 500px;
     }
 
     .sidebar-item {
@@ -974,6 +983,7 @@
       transition: all 0.22s ease;
       animation: fadeIn 0.5s ease;
       box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
+      contain: layout style;
     }
 
     .sidebar-item:hover {
@@ -1324,6 +1334,7 @@
         margin: 20px 0;
         font-size: 1.8rem;
         font-weight: 600;
+        will-change: opacity, transform, filter;
     }
 
     .lyric-line.active {
@@ -1352,6 +1363,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        content-visibility: auto;
+        contain-intrinsic-size: auto 1000px;
         
         -webkit-mask-image: linear-gradient(
             to bottom,
@@ -3147,7 +3160,7 @@
 
   <audio id="audioPlayer"></audio>
 
-  <script>
+  <script defer>
     // ===== DOM Cache =====
     const dynamicIsland = document.getElementById('dynamicIsland');
     const dynamicIslandClose = document.getElementById('dynamicIslandClose');
