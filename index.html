@@ -1589,22 +1589,23 @@
       background: rgba(255, 255, 255, 0.8) !important;
     }
 
-    /* MV 模态框样式 */
+    /* MV 模态框样式 - Apple TV 风格 */
     .mv-modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2100;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .mv-modal-overlay.active {
@@ -1613,48 +1614,78 @@
     }
 
     .mv-modal-content {
-      background: var(--liquid-glass-bg-dark) !important;
-      backdrop-filter: var(--liquid-blur) var(--liquid-saturate) !important;
-      border: var(--liquid-border-dark) !important;
-      border-radius: var(--border-radius-liquid);
-      width: 85%;
-      max-width: 1000px;
-      box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
+      background: rgba(22, 22, 27, 0.95);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border-radius: 24px;
+      width: 90%;
+      max-width: 1100px;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .mv-modal-overlay.active .mv-modal-content {
-      transform: translateY(0);
+      transform: scale(1) translateY(0);
     }
 
     .mv-modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 28px;
-      border-bottom: 1px solid var(--border-dark);
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .mv-modal-title {
       margin: 0;
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 600;
-      color: var(--text-dark);
-      letter-spacing: 0.3px;
+      color: #f5f5f7;
+      letter-spacing: -0.3px;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    }
+
+    .mv-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mv-fetch-btn {
+      padding: 8px 16px;
+      background: rgba(255, 45, 85, 0.15);
+      border: 1px solid rgba(255, 45, 85, 0.3);
+      border-radius: 999px;
+      color: #ff2d55;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mv-fetch-btn:hover {
+      background: rgba(255, 45, 85, 0.25);
+      border-color: rgba(255, 45, 85, 0.5);
+      transform: scale(1.02);
     }
 
     .mv-modal-close {
-      background: none;
+      background: rgba(255, 255, 255, 0.08);
       border: none;
-      color: var(--text-muted-dark);
+      color: #8e8e93;
       cursor: pointer;
-      font-size: 22px;
-      width: 36px;
-      height: 36px;
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1663,14 +1694,14 @@
     }
 
     .mv-modal-close:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--error-color);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
 
     .mv-video-container {
       position: relative;
       background: #000;
-      min-height: 400px;
+      min-height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1679,52 +1710,79 @@
 
     .mv-video-player {
       width: 100%;
-      max-height: 70vh;
+      max-height: 75vh;
       object-fit: contain;
       display: none;
     }
 
     .mv-placeholder {
       text-align: center;
-      color: rgba(255, 255, 255, 0.6);
-      padding: 60px 20px;
+      color: #8e8e93;
+      padding: 80px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 15px;
+      gap: 16px;
     }
 
     .mv-placeholder i {
-      font-size: 64px;
-      opacity: 0.6;
+      font-size: 48px;
+      opacity: 0.4;
+      color: #636366;
     }
 
     .mv-placeholder p {
-      font-size: 18px;
+      font-size: 17px;
       margin: 0;
+      color: #f5f5f7;
+      font-weight: 500;
     }
 
     .mv-placeholder small {
       font-size: 13px;
-      opacity: 0.7;
+      color: #636366;
     }
 
     /* 浅色主题适配 */
     body.light-theme .mv-modal-content {
-      background: var(--liquid-glass-bg-light) !important;
-      border: var(--liquid-border-light) !important;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.08);
     }
 
     body.light-theme .mv-modal-header {
-      border-bottom-color: var(--border-light);
+      border-bottom-color: rgba(0, 0, 0, 0.06);
+      background: rgba(0, 0, 0, 0.02);
     }
 
     body.light-theme .mv-modal-title {
-      color: var(--text-light);
+      color: #1d1d1f;
+    }
+
+    body.light-theme .mv-fetch-btn {
+      background: rgba(255, 45, 85, 0.1);
+      border-color: rgba(255, 45, 85, 0.2);
+    }
+
+    body.light-theme .mv-fetch-btn:hover {
+      background: rgba(255, 45, 85, 0.18);
+    }
+
+    body.light-theme .mv-modal-close {
+      background: rgba(0, 0, 0, 0.06);
+      color: #86868b;
+    }
+
+    body.light-theme .mv-modal-close:hover {
+      background: rgba(0, 0, 0, 0.12);
+      color: #1d1d1f;
     }
 
     body.light-theme .mv-placeholder {
-      color: rgba(0, 0, 0, 0.6);
+      color: #86868b;
+    }
+
+    body.light-theme .mv-placeholder p {
+      color: #1d1d1f;
     }
 
     /* 歌词切换按钮 */
@@ -1828,23 +1886,23 @@
       color: var(--primary-color);
     }
 
-    /* 设置模态框 */
+    /* 设置模态框 - iOS 风格 */
     .settings-modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2001;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .settings-modal-overlay.active {
@@ -1853,68 +1911,78 @@
     }
 
     .settings-modal-content {
-      background: rgba(22, 22, 27, 0.68) !important;
-      backdrop-filter: blur(40px) saturate(210%) !important;
-      -webkit-backdrop-filter: blur(40px) saturate(210%) !important;
-      border: var(--liquid-border-dark) !important;
-      border-radius: 28px;
-      padding: 28px;
-      max-width: 500px;
+      background: rgba(28, 28, 30, 0.95);
+      backdrop-filter: blur(40px) saturate(200%);
+      -webkit-backdrop-filter: blur(40px) saturate(200%);
+      border-radius: 20px;
+      padding: 0;
+      max-width: 480px;
       width: 90%;
       max-height: 80vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-      box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .settings-modal-overlay.active .settings-modal-content {
-      transform: translateY(0);
+      transform: scale(1) translateY(0);
     }
 
     .modal-title {
-      color: var(--primary-color);
-      margin: 0 0 20px 0;
-      font-size: 24px;
+      color: #f5f5f7;
+      margin: 0;
+      padding: 22px 24px 18px;
+      font-size: 20px;
       font-weight: 700;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      letter-spacing: -0.3px;
     }
 
     .settings-tabs {
       display: flex;
-      gap: 10px;
-      border-bottom: none;
-      margin-bottom: 18px;
+      gap: 8px;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .settings-tab {
-      padding: 10px 18px;
+      flex: 1;
+      padding: 10px 16px;
       cursor: pointer;
-      color: rgba(255,255,255,0.65);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
+      color: #8e8e93;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
       transition: all 0.2s ease;
-      font-weight: 650;
-      font-size: 13px;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
     }
 
     .settings-tab:hover {
-      color: var(--text-dark);
+      color: #f5f5f7;
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .settings-tab.active {
-      background: rgba(255, 45, 85, 0.18);
-      border-color: rgba(255, 45, 85, 0.25);
-      color: rgba(255,255,255,0.95);
-      box-shadow: 0 12px 28px rgba(255,45,85,0.10);
+      background: rgba(255, 45, 85, 0.15);
+      color: #ff2d55;
+      font-weight: 600;
     }
 
     .settings-content {
       flex: 1;
       overflow-y: auto;
+      padding: 20px 24px 24px;
     }
 
     .settings-tab-content {
@@ -1926,27 +1994,41 @@
     }
 
     .settings-section {
-      margin-bottom: 25px;
+      margin-bottom: 28px;
+    }
+
+    .settings-section:last-child {
+      margin-bottom: 0;
     }
 
     .settings-section-title {
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: var(--text-dark);
+      font-size: 13px;
+      font-weight: 600;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
     }
 
     .settings-option {
       display: flex;
       align-items: center;
-      margin-bottom: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .settings-option:last-child {
+      border-bottom: none;
     }
 
     .switch {
       position: relative;
       display: inline-block;
-      width: 50px;
-      height: 24px;
-      margin-right: 15px;
+      width: 51px;
+      height: 31px;
+      margin-right: 14px;
+      flex-shrink: 0;
     }
 
     .switch input {
@@ -1962,38 +2044,37 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.12);
-      transition: .4s;
-      border-radius: 24px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.35) inset;
+      background-color: rgba(120, 120, 128, 0.4);
+      transition: .3s cubic-bezier(0.25, 0.1, 0.25, 1);
+      border-radius: 31px;
     }
 
     .slider:before {
       position: absolute;
       content: "";
-      height: 16px;
-      width: 16px;
-      left: 4px;
-      bottom: 4px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
-      transition: .4s;
+      height: 27px;
+      width: 27px;
+      left: 2px;
+      bottom: 2px;
+      background: linear-gradient(180deg, #ffffff, #e5e5ea);
+      transition: .3s cubic-bezier(0.25, 0.1, 0.25, 1);
       border-radius: 50%;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     input:checked + .slider {
-      background: rgba(52, 199, 89, 0.85);
-      border-color: rgba(52, 199, 89, 0.45);
+      background: rgba(52, 199, 89, 0.9);
     }
 
     input:checked + .slider:before {
-      transform: translateX(26px);
+      transform: translateX(20px);
     }
 
     .settings-option-label {
-      color: var(--text-dark);
+      color: #f5f5f7;
       font-size: 16px;
+      flex: 1;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
     }
 
     .radio-group {
@@ -2001,78 +2082,200 @@
       flex-direction: column;
       gap: 10px;
       margin-left: 10px;
+      width: 100%;
     }
 
     .radio-label {
       display: flex;
       align-items: center;
       cursor: pointer;
-      color: var(--text-dark);
+      color: #f5f5f7;
+      font-size: 15px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      transition: background 0.2s ease;
+    }
+
+    .radio-label:hover {
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .radio-label input {
-      margin-right: 8px;
+      margin-right: 10px;
+      accent-color: #ff2d55;
     }
 
     .api-token-input {
-      flex: 1;
-      padding: 10px 15px;
-      border-radius: 8px;
-      background: var(--input-bg-dark);
-      border: 1px solid var(--border-dark);
-      color: var(--text-dark);
-      font-size: 14px;
-      margin-top: 5px;
       width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f5f5f7;
+      font-size: 15px;
+      margin-top: 8px;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    }
+
+    .api-token-input:focus {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 45, 85, 0.4);
+    }
+
+    .api-token-input::placeholder {
+      color: #636366;
     }
 
     .settings-hint {
       font-size: 12px;
-      color: var(--text-muted-dark);
-      margin-top: 5px;
+      color: #636366;
+      margin-top: 8px;
+      line-height: 1.4;
     }
 
     .test-api-btn,
     .save-settings-btn {
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
       border: none;
       cursor: pointer;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       transition: all 0.2s ease;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      margin-top: 12px;
     }
 
     .test-api-btn {
-      background: var(--secondary-color);
+      background: rgba(88, 86, 214, 0.9);
       color: white;
       margin-right: 10px;
     }
 
+    .test-api-btn:hover {
+      background: rgba(88, 86, 214, 1);
+      transform: scale(1.02);
+    }
+
     .save-settings-btn {
-      background: var(--primary-color);
+      background: rgba(255, 45, 85, 0.9);
       color: white;
     }
 
-    .test-api-btn:hover,
     .save-settings-btn:hover {
-      opacity: 0.9;
+      background: rgba(255, 45, 85, 1);
+      transform: scale(1.02);
     }
 
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.08);
       border: none;
-      color: var(--text-muted-dark);
-      font-size: 20px;
+      color: #8e8e93;
+      font-size: 18px;
       cursor: pointer;
-      padding: 5px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      z-index: 10;
     }
 
     .modal-close:hover {
-      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.15);
+      color: #f5f5f7;
+    }
+
+    /* 浅色主题适配 - 设置页面 */
+    body.light-theme .settings-modal-content {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    body.light-theme .modal-title {
+      color: #1d1d1f;
+      border-bottom-color: rgba(0, 0, 0, 0.06);
+    }
+
+    body.light-theme .settings-tabs {
+      border-bottom-color: rgba(0, 0, 0, 0.06);
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    body.light-theme .settings-tab {
+      color: #86868b;
+    }
+
+    body.light-theme .settings-tab:hover {
+      color: #1d1d1f;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    body.light-theme .settings-tab.active {
+      background: rgba(255, 45, 85, 0.1);
+      color: #ff2d55;
+    }
+
+    body.light-theme .settings-section-title {
+      color: #86868b;
+    }
+
+    body.light-theme .settings-option {
+      border-bottom-color: rgba(0, 0, 0, 0.06);
+    }
+
+    body.light-theme .settings-option-label {
+      color: #1d1d1f;
+    }
+
+    body.light-theme .radio-label {
+      color: #1d1d1f;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    body.light-theme .radio-label:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    body.light-theme .api-token-input {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.08);
+      color: #1d1d1f;
+    }
+
+    body.light-theme .api-token-input:focus {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(255, 45, 85, 0.3);
+    }
+
+    body.light-theme .api-token-input::placeholder {
+      color: #86868b;
+    }
+
+    body.light-theme .settings-hint {
+      color: #86868b;
+    }
+
+    body.light-theme .slider {
+      background-color: rgba(120, 120, 128, 0.2);
+    }
+
+    body.light-theme .modal-close {
+      background: rgba(0, 0, 0, 0.06);
+      color: #86868b;
+    }
+
+    body.light-theme .modal-close:hover {
+      background: rgba(0, 0, 0, 0.12);
+      color: #1d1d1f;
     }
 
     /* 动画 */
@@ -2934,11 +3137,14 @@
 
 <div class="modal-overlay settings-modal-overlay" id="settingsModalOverlay">
   <div class="modal-content settings-modal-content">
-    <h2 class="modal-title">设置</h2> 
+    <h2 class="modal-title">设置</h2>
+    <button class="modal-close" id="settingsModalClose">
+      <i class="fas fa-times"></i>
+    </button>
     <div class="settings-tabs">
-  <div class="settings-tab active" data-tab="lyrics">歌词</div>
-  <div class="settings-tab" data-tab="visual">视觉</div>
-</div>
+      <div class="settings-tab active" data-tab="lyrics">歌词</div>
+      <div class="settings-tab" data-tab="visual">视觉</div>
+    </div>
 
 <div class="settings-content">
   <!-- 歌词选项卡内容 -->
@@ -3015,10 +3221,6 @@
     </div>
   </div>
 </div>
-
-    <button class="modal-close" id="settingsModalClose">
-      <i class="fas fa-times"></i>
-    </button>
   </div>
 </div>
 
@@ -3137,12 +3339,14 @@
     <div class="mv-modal-content">
       <div class="mv-modal-header">
         <h3 class="mv-modal-title" id="mvModalTitle">加载中…</h3>
-        <button class="mv-fetch-btn" id="mvFetchBtn">
-          <i class="fas fa-download"></i> 解析当前歌曲 MV
-        </button>
-        <button class="mv-modal-close" id="mvModalClose">
-          <i class="fas fa-times"></i>
-        </button>
+        <div class="mv-header-actions">
+          <button class="mv-fetch-btn" id="mvFetchBtn">
+            <i class="fas fa-download"></i> 解析 MV
+          </button>
+          <button class="mv-modal-close" id="mvModalClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
       <div class="mv-video-container">
         <video class="mv-video-player" id="mvVideoPlayer" controls>
