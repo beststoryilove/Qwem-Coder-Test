@@ -1250,8 +1250,8 @@
     }
 
     body.light-theme .time-display {
-      color: var(--text-secondary-light);
-      text-shadow: none;
+      color: #fff !important;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     }
 
     .now-playing-title {
@@ -1263,8 +1263,13 @@
       text-overflow: ellipsis;
       max-width: 425px;
       margin: 0 auto;
+      color: #fff;
       -webkit-user-select: text;
       user-select: text;
+    }
+
+    body.light-theme .now-playing-title {
+      color: #fff !important;
     }
 
     /* 进度条 */
@@ -1394,12 +1399,12 @@
     }
 
     body.light-theme .progress-bar::-webkit-slider-runnable-track {
-      background: linear-gradient(to right, var(--primary-color) var(--progress), rgba(0,0,0,0.2) var(--progress));
+      background: linear-gradient(to right, #fff var(--progress), rgba(255,255,255,0.35) var(--progress));
     }
 
     body.light-theme .progress-bar::-webkit-slider-thumb {
-      background: var(--primary-color);
-      box-shadow: 0 2px 8px rgba(255, 45, 85, 0.4);
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
     }
 
     .progress {
@@ -1413,8 +1418,8 @@
     }
 
     body.light-theme .progress {
-      background: var(--primary-gradient);
-      box-shadow: 0 2px 10px rgba(255, 45, 85, 0.35);
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.75));
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
     }
 
     /* 控制按钮 */
@@ -2810,6 +2815,11 @@
     #playBtn {
         font-size: 48px;
         filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+        color: #fff !important;
+    }
+
+    body.light-theme #playBtn {
+        color: #000 !important;
     }
 
     #lyrics-container {
