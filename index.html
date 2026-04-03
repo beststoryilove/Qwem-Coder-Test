@@ -4,11 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="description" content="Harmonia - 一个美观易用的在线音乐播放器，支持歌词显示、播放列表管理和多主题切换" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="color-scheme" content="dark light" />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" />
   <title>Harmonia - 音乐播放器</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <style>
@@ -184,7 +179,6 @@
       transform: scale(1.2);
       transition: background-image 0.5s ease;
       will-change: background-image;
-      contain: strict;
     }
 
     .am-background::after {
@@ -511,7 +505,6 @@
       backdrop-filter: var(--liquid-blur) var(--liquid-saturate) !important;
       -webkit-backdrop-filter: var(--liquid-blur) var(--liquid-saturate) !important;
       box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
-      contain: layout style;
     }
 
     .island-result-item:hover {
@@ -963,8 +956,6 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      content-visibility: auto;
-      contain-intrinsic-size: auto 500px;
     }
 
     .sidebar-item {
@@ -983,7 +974,6 @@
       transition: all 0.22s ease;
       animation: fadeIn 0.5s ease;
       box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
-      contain: layout style;
     }
 
     .sidebar-item:hover {
@@ -1334,7 +1324,6 @@
         margin: 20px 0;
         font-size: 1.8rem;
         font-weight: 600;
-        will-change: opacity, transform, filter;
     }
 
     .lyric-line.active {
@@ -1363,8 +1352,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        content-visibility: auto;
-        contain-intrinsic-size: auto 1000px;
         
         -webkit-mask-image: linear-gradient(
             to bottom,
@@ -1589,23 +1576,22 @@
       background: rgba(255, 255, 255, 0.8) !important;
     }
 
-    /* MV 模态框样式 - Apple TV 风格 */
+    /* MV 模态框样式 */
     .mv-modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2100;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s ease;
     }
 
     .mv-modal-overlay.active {
@@ -1614,78 +1600,48 @@
     }
 
     .mv-modal-content {
-      background: rgba(22, 22, 27, 0.95);
-      backdrop-filter: blur(40px) saturate(180%);
-      -webkit-backdrop-filter: blur(40px) saturate(180%);
-      border-radius: 24px;
-      width: 90%;
-      max-width: 1100px;
-      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
-      transform: scale(0.95) translateY(20px);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--liquid-glass-bg-dark) !important;
+      backdrop-filter: var(--liquid-blur) var(--liquid-saturate) !important;
+      border: var(--liquid-border-dark) !important;
+      border-radius: var(--border-radius-liquid);
+      width: 85%;
+      max-width: 1000px;
+      box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .mv-modal-overlay.active .mv-modal-content {
-      transform: scale(1) translateY(0);
+      transform: translateY(0);
     }
 
     .mv-modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(255, 255, 255, 0.02);
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border-dark);
     }
 
     .mv-modal-title {
       margin: 0;
-      font-size: 17px;
+      font-size: 20px;
       font-weight: 600;
-      color: #f5f5f7;
-      letter-spacing: -0.3px;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-    }
-
-    .mv-header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .mv-fetch-btn {
-      padding: 8px 16px;
-      background: rgba(255, 45, 85, 0.15);
-      border: 1px solid rgba(255, 45, 85, 0.3);
-      border-radius: 999px;
-      color: #ff2d55;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .mv-fetch-btn:hover {
-      background: rgba(255, 45, 85, 0.25);
-      border-color: rgba(255, 45, 85, 0.5);
-      transform: scale(1.02);
+      color: var(--text-dark);
+      letter-spacing: 0.3px;
     }
 
     .mv-modal-close {
-      background: rgba(255, 255, 255, 0.08);
+      background: none;
       border: none;
-      color: #8e8e93;
+      color: var(--text-muted-dark);
       cursor: pointer;
-      font-size: 18px;
-      width: 32px;
-      height: 32px;
+      font-size: 22px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1694,14 +1650,14 @@
     }
 
     .mv-modal-close:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--error-color);
     }
 
     .mv-video-container {
       position: relative;
       background: #000;
-      min-height: 500px;
+      min-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1710,79 +1666,52 @@
 
     .mv-video-player {
       width: 100%;
-      max-height: 75vh;
+      max-height: 70vh;
       object-fit: contain;
       display: none;
     }
 
     .mv-placeholder {
       text-align: center;
-      color: #8e8e93;
-      padding: 80px 24px;
+      color: rgba(255, 255, 255, 0.6);
+      padding: 60px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 15px;
     }
 
     .mv-placeholder i {
-      font-size: 48px;
-      opacity: 0.4;
-      color: #636366;
+      font-size: 64px;
+      opacity: 0.6;
     }
 
     .mv-placeholder p {
-      font-size: 17px;
+      font-size: 18px;
       margin: 0;
-      color: #f5f5f7;
-      font-weight: 500;
     }
 
     .mv-placeholder small {
       font-size: 13px;
-      color: #636366;
+      opacity: 0.7;
     }
 
     /* 浅色主题适配 */
     body.light-theme .mv-modal-content {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: var(--liquid-glass-bg-light) !important;
+      border: var(--liquid-border-light) !important;
     }
 
     body.light-theme .mv-modal-header {
-      border-bottom-color: rgba(0, 0, 0, 0.06);
-      background: rgba(0, 0, 0, 0.02);
+      border-bottom-color: var(--border-light);
     }
 
     body.light-theme .mv-modal-title {
-      color: #1d1d1f;
-    }
-
-    body.light-theme .mv-fetch-btn {
-      background: rgba(255, 45, 85, 0.1);
-      border-color: rgba(255, 45, 85, 0.2);
-    }
-
-    body.light-theme .mv-fetch-btn:hover {
-      background: rgba(255, 45, 85, 0.18);
-    }
-
-    body.light-theme .mv-modal-close {
-      background: rgba(0, 0, 0, 0.06);
-      color: #86868b;
-    }
-
-    body.light-theme .mv-modal-close:hover {
-      background: rgba(0, 0, 0, 0.12);
-      color: #1d1d1f;
+      color: var(--text-light);
     }
 
     body.light-theme .mv-placeholder {
-      color: #86868b;
-    }
-
-    body.light-theme .mv-placeholder p {
-      color: #1d1d1f;
+      color: rgba(0, 0, 0, 0.6);
     }
 
     /* 歌词切换按钮 */
@@ -1886,23 +1815,23 @@
       color: var(--primary-color);
     }
 
-    /* 设置模态框 - iOS 风格 */
+    /* 设置模态框 */
     .settings-modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2001;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s ease;
     }
 
     .settings-modal-overlay.active {
@@ -1911,78 +1840,68 @@
     }
 
     .settings-modal-content {
-      background: rgba(28, 28, 30, 0.95);
-      backdrop-filter: blur(40px) saturate(200%);
-      -webkit-backdrop-filter: blur(40px) saturate(200%);
-      border-radius: 20px;
-      padding: 0;
-      max-width: 480px;
+      background: rgba(22, 22, 27, 0.68) !important;
+      backdrop-filter: blur(40px) saturate(210%) !important;
+      -webkit-backdrop-filter: blur(40px) saturate(210%) !important;
+      border: var(--liquid-border-dark) !important;
+      border-radius: 28px;
+      padding: 28px;
+      max-width: 500px;
       width: 90%;
       max-height: 80vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transform: scale(0.95) translateY(20px);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
       position: relative;
-      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--glass-depth-shadow), var(--glass-inner-glow) !important;
     }
 
     .settings-modal-overlay.active .settings-modal-content {
-      transform: scale(1) translateY(0);
+      transform: translateY(0);
     }
 
     .modal-title {
-      color: #f5f5f7;
-      margin: 0;
-      padding: 22px 24px 18px;
-      font-size: 20px;
+      color: var(--primary-color);
+      margin: 0 0 20px 0;
+      font-size: 24px;
       font-weight: 700;
-      text-align: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-      letter-spacing: -0.3px;
     }
 
     .settings-tabs {
       display: flex;
-      gap: 8px;
-      padding: 16px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(255, 255, 255, 0.02);
+      gap: 10px;
+      border-bottom: none;
+      margin-bottom: 18px;
     }
 
     .settings-tab {
-      flex: 1;
-      padding: 10px 16px;
+      padding: 10px 18px;
       cursor: pointer;
-      color: #8e8e93;
-      border: none;
-      border-radius: 10px;
-      background: transparent;
+      color: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
       transition: all 0.2s ease;
-      font-weight: 600;
-      font-size: 14px;
-      text-align: center;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      font-weight: 650;
+      font-size: 13px;
     }
 
     .settings-tab:hover {
-      color: #f5f5f7;
-      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dark);
     }
 
     .settings-tab.active {
-      background: rgba(255, 45, 85, 0.15);
-      color: #ff2d55;
-      font-weight: 600;
+      background: rgba(255, 45, 85, 0.18);
+      border-color: rgba(255, 45, 85, 0.25);
+      color: rgba(255,255,255,0.95);
+      box-shadow: 0 12px 28px rgba(255,45,85,0.10);
     }
 
     .settings-content {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 24px 24px;
     }
 
     .settings-tab-content {
@@ -1994,41 +1913,27 @@
     }
 
     .settings-section {
-      margin-bottom: 28px;
-    }
-
-    .settings-section:last-child {
-      margin-bottom: 0;
+      margin-bottom: 25px;
     }
 
     .settings-section-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #8e8e93;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: var(--text-dark);
     }
 
     .settings-option {
       display: flex;
       align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .settings-option:last-child {
-      border-bottom: none;
+      margin-bottom: 15px;
     }
 
     .switch {
       position: relative;
       display: inline-block;
-      width: 51px;
-      height: 31px;
-      margin-right: 14px;
-      flex-shrink: 0;
+      width: 50px;
+      height: 24px;
+      margin-right: 15px;
     }
 
     .switch input {
@@ -2044,37 +1949,38 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(120, 120, 128, 0.4);
-      transition: .3s cubic-bezier(0.25, 0.1, 0.25, 1);
-      border-radius: 31px;
+      background-color: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: .4s;
+      border-radius: 24px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.35) inset;
     }
 
     .slider:before {
       position: absolute;
       content: "";
-      height: 27px;
-      width: 27px;
-      left: 2px;
-      bottom: 2px;
-      background: linear-gradient(180deg, #ffffff, #e5e5ea);
-      transition: .3s cubic-bezier(0.25, 0.1, 0.25, 1);
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+      transition: .4s;
       border-radius: 50%;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
     }
 
     input:checked + .slider {
-      background: rgba(52, 199, 89, 0.9);
+      background: rgba(52, 199, 89, 0.85);
+      border-color: rgba(52, 199, 89, 0.45);
     }
 
     input:checked + .slider:before {
-      transform: translateX(20px);
+      transform: translateX(26px);
     }
 
     .settings-option-label {
-      color: #f5f5f7;
+      color: var(--text-dark);
       font-size: 16px;
-      flex: 1;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
     }
 
     .radio-group {
@@ -2082,200 +1988,78 @@
       flex-direction: column;
       gap: 10px;
       margin-left: 10px;
-      width: 100%;
     }
 
     .radio-label {
       display: flex;
       align-items: center;
       cursor: pointer;
-      color: #f5f5f7;
-      font-size: 15px;
-      padding: 10px 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      transition: background 0.2s ease;
-    }
-
-    .radio-label:hover {
-      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-dark);
     }
 
     .radio-label input {
-      margin-right: 10px;
-      accent-color: #ff2d55;
+      margin-right: 8px;
     }
 
     .api-token-input {
+      flex: 1;
+      padding: 10px 15px;
+      border-radius: 8px;
+      background: var(--input-bg-dark);
+      border: 1px solid var(--border-dark);
+      color: var(--text-dark);
+      font-size: 14px;
+      margin-top: 5px;
       width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #f5f5f7;
-      font-size: 15px;
-      margin-top: 8px;
-      outline: none;
-      transition: all 0.2s ease;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-    }
-
-    .api-token-input:focus {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 45, 85, 0.4);
-    }
-
-    .api-token-input::placeholder {
-      color: #636366;
     }
 
     .settings-hint {
       font-size: 12px;
-      color: #636366;
-      margin-top: 8px;
-      line-height: 1.4;
+      color: var(--text-muted-dark);
+      margin-top: 5px;
     }
 
     .test-api-btn,
     .save-settings-btn {
-      padding: 12px 20px;
-      border-radius: 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
       transition: all 0.2s ease;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-      margin-top: 12px;
     }
 
     .test-api-btn {
-      background: rgba(88, 86, 214, 0.9);
+      background: var(--secondary-color);
       color: white;
       margin-right: 10px;
     }
 
-    .test-api-btn:hover {
-      background: rgba(88, 86, 214, 1);
-      transform: scale(1.02);
-    }
-
     .save-settings-btn {
-      background: rgba(255, 45, 85, 0.9);
+      background: var(--primary-color);
       color: white;
     }
 
+    .test-api-btn:hover,
     .save-settings-btn:hover {
-      background: rgba(255, 45, 85, 1);
-      transform: scale(1.02);
+      opacity: 0.9;
     }
 
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 18px;
-      background: rgba(255, 255, 255, 0.08);
+      top: 20px;
+      right: 20px;
+      background: none;
       border: none;
-      color: #8e8e93;
-      font-size: 18px;
+      color: var(--text-muted-dark);
+      font-size: 20px;
       cursor: pointer;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: all 0.2s ease;
-      z-index: 10;
+      padding: 5px;
     }
 
     .modal-close:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #f5f5f7;
-    }
-
-    /* 浅色主题适配 - 设置页面 */
-    body.light-theme .settings-modal-content {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    body.light-theme .modal-title {
-      color: #1d1d1f;
-      border-bottom-color: rgba(0, 0, 0, 0.06);
-    }
-
-    body.light-theme .settings-tabs {
-      border-bottom-color: rgba(0, 0, 0, 0.06);
-      background: rgba(0, 0, 0, 0.02);
-    }
-
-    body.light-theme .settings-tab {
-      color: #86868b;
-    }
-
-    body.light-theme .settings-tab:hover {
-      color: #1d1d1f;
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    body.light-theme .settings-tab.active {
-      background: rgba(255, 45, 85, 0.1);
-      color: #ff2d55;
-    }
-
-    body.light-theme .settings-section-title {
-      color: #86868b;
-    }
-
-    body.light-theme .settings-option {
-      border-bottom-color: rgba(0, 0, 0, 0.06);
-    }
-
-    body.light-theme .settings-option-label {
-      color: #1d1d1f;
-    }
-
-    body.light-theme .radio-label {
-      color: #1d1d1f;
-      background: rgba(0, 0, 0, 0.03);
-    }
-
-    body.light-theme .radio-label:hover {
-      background: rgba(0, 0, 0, 0.06);
-    }
-
-    body.light-theme .api-token-input {
-      background: rgba(0, 0, 0, 0.05);
-      border-color: rgba(0, 0, 0, 0.08);
-      color: #1d1d1f;
-    }
-
-    body.light-theme .api-token-input:focus {
-      background: rgba(0, 0, 0, 0.08);
-      border-color: rgba(255, 45, 85, 0.3);
-    }
-
-    body.light-theme .api-token-input::placeholder {
-      color: #86868b;
-    }
-
-    body.light-theme .settings-hint {
-      color: #86868b;
-    }
-
-    body.light-theme .slider {
-      background-color: rgba(120, 120, 128, 0.2);
-    }
-
-    body.light-theme .modal-close {
-      background: rgba(0, 0, 0, 0.06);
-      color: #86868b;
-    }
-
-    body.light-theme .modal-close:hover {
-      background: rgba(0, 0, 0, 0.12);
-      color: #1d1d1f;
+      color: var(--text-dark);
     }
 
     /* 动画 */
@@ -3137,14 +2921,11 @@
 
 <div class="modal-overlay settings-modal-overlay" id="settingsModalOverlay">
   <div class="modal-content settings-modal-content">
-    <h2 class="modal-title">设置</h2>
-    <button class="modal-close" id="settingsModalClose">
-      <i class="fas fa-times"></i>
-    </button>
+    <h2 class="modal-title">设置</h2> 
     <div class="settings-tabs">
-      <div class="settings-tab active" data-tab="lyrics">歌词</div>
-      <div class="settings-tab" data-tab="visual">视觉</div>
-    </div>
+  <div class="settings-tab active" data-tab="lyrics">歌词</div>
+  <div class="settings-tab" data-tab="visual">视觉</div>
+</div>
 
 <div class="settings-content">
   <!-- 歌词选项卡内容 -->
@@ -3221,6 +3002,10 @@
     </div>
   </div>
 </div>
+
+    <button class="modal-close" id="settingsModalClose">
+      <i class="fas fa-times"></i>
+    </button>
   </div>
 </div>
 
@@ -3339,14 +3124,12 @@
     <div class="mv-modal-content">
       <div class="mv-modal-header">
         <h3 class="mv-modal-title" id="mvModalTitle">加载中…</h3>
-        <div class="mv-header-actions">
-          <button class="mv-fetch-btn" id="mvFetchBtn">
-            <i class="fas fa-download"></i> 解析 MV
-          </button>
-          <button class="mv-modal-close" id="mvModalClose">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
+        <button class="mv-fetch-btn" id="mvFetchBtn">
+          <i class="fas fa-download"></i> 解析当前歌曲 MV
+        </button>
+        <button class="mv-modal-close" id="mvModalClose">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
       <div class="mv-video-container">
         <video class="mv-video-player" id="mvVideoPlayer" controls>
@@ -3364,7 +3147,7 @@
 
   <audio id="audioPlayer"></audio>
 
-  <script defer>
+  <script>
     // ===== DOM Cache =====
     const dynamicIsland = document.getElementById('dynamicIsland');
     const dynamicIslandClose = document.getElementById('dynamicIslandClose');
@@ -5391,6 +5174,11 @@
       try {
         clearError();
 
+        // 如果当前有 MV 正在播放，先停止 MV
+        if (currentMvVideoUrl && mvVideoPlayer.src && !mvVideoPlayer.paused) {
+          stopCurrentMv();
+        }
+
         nowPlayingTitle.textContent = song.name || '未知歌曲';
         currentSongInfo = {
           name: song.name || '未知歌曲',
@@ -5454,6 +5242,7 @@
         const audioUrl = await getAudioUrl(song.id, song.source);
         audioPlayer.src = audioUrl;
 
+        // 在请求歌曲资源期间，保持"正在请求中"状态，不提前更新灵动岛文本
         await audioPlayer.play()
           .then(() => {
             playButton.innerHTML = '<i class="fas fa-pause"></i>';
@@ -5470,7 +5259,7 @@
             if (currentTab === 'playlist') {
               renderPlaylist();
             }
-            updateCollapsedTextByPlayingState();
+            // 播放成功后才更新为"正在播放"（由 play 事件监听器处理）
           })
           .catch(e => {
             playButton.innerHTML = '<i class="fas fa-play"></i>';
@@ -6061,35 +5850,44 @@
         playButton.innerHTML = '<i class="fas fa-play"></i>';
         isPlaying = false;
         updatePageTitle();
-        updateCollapsedTextByPlayingState(); // 更新灵动岛文字
-    
+        // 歌曲结束时显示"Harmonia"，等待下一首开始播放时再更新（由 play 事件监听器处理）
+        updateCollapsedText('Harmonia');
         // 如果没有歌曲在播放，仅清理ID
         if (!currentPlayingId) {
             currentPlayingId = null;
             return;
         }
     
-        // 检查播放模式：只有单曲循环时才自动重播，否则停止播放（并将进度归零）
+        // 检查播放模式
         if (currentPlayMode === 'repeat') {
             // 单曲循环：从头开始重新播放同一首歌
             try {
                 audioPlayer.currentTime = 0;
+                // 重播时保持 currentPlayingId 不变，play 事件会更新文本
                 await audioPlayer.play();
-                playButton.innerHTML = '<i class="fas fa-pause"></i>';
-                isPlaying = true;
-                updatePageTitle();
-                // 重播时保持 currentPlayingId 不变，无需更新折叠文字
             } catch (e) {
                 console.error('单曲循环自动播放失败:', e);
                 currentPlayingId = null;
             }
         } else {
-            // 其他模式（普通、随机等）：播放结束即暂停，并将进度重置到开头
-            // 这样下次点击播放时，歌曲会从头开始
-            audioPlayer.currentTime = 0;
-            // 不自动播放任何歌曲，不清空 currentPlayingId 以便下次手动播放
-            // 但为了让界面显示为暂停状态，已在上方设置 isPlaying = false 和按钮图标
-            // 注意：不要自动切换到下一首
+            // 其他模式（顺序播放、随机播放）：自动播放下一首
+            const nextSongId = getNextSongId(currentPlayingId);
+            if (nextSongId && nextSongId !== currentPlayingId) {
+                const nextSong = getSongById(nextSongId);
+                if (nextSong) {
+                    try {
+                        await playSong(nextSong, true);
+                        // playSong 成功后，play 事件会更新文本为"正在播放"
+                    } catch (e) {
+                        console.error('自动播放下一首失败:', e);
+                        currentPlayingId = null;
+                    }
+                }
+            } else {
+                // 没有下一首歌曲，停止播放
+                audioPlayer.currentTime = 0;
+                currentPlayingId = null;
+            }
         }
     });
 
@@ -6102,11 +5900,13 @@
     audioPlayer.addEventListener('play', () => {
       isPlaying = true;
       updatePageTitle();
+      updateCollapsedText('正在播放');
     });
 
     audioPlayer.addEventListener('pause', () => {
       isPlaying = false;
       updatePageTitle();
+      updateCollapsedText('Harmonia');
     });
 
     volumeSlider.addEventListener('input', debounce((e) => {
